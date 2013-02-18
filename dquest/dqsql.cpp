@@ -151,7 +151,7 @@ bool DQSql::insertInto(DQModelMetaInfo* info,DQModel *model,QStringList fields,b
 
     bool res = false;
 
-    if (d->m_lastQuery.exec()) {
+    if (d->m_lastQuery.exec()) {        
         res = true;
         if (updateId) {
             int id = d->m_lastQuery.lastInsertId().toInt();

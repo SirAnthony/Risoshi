@@ -20,10 +20,13 @@ public:
     explicit RTabWidget(QWidget *parent = 0);
     ~RTabWidget();
 
-private:    
+private slots:
+    void tabSwitch(QWidget *arg1);
+
+private:
     Ui::RTabWidget *ui;    
     QSqlQueryModel viewModel;
-    QSqlDatabase db;
+    QSqlDatabase db;    
     DQConnection* connection;
 
 };

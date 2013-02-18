@@ -70,8 +70,8 @@ bool DQModel::save(bool forceInsert,bool forceAllField) {
 
     DQSql sql = m_connection.sql();
 
-    if (forceInsert || id->isNull() ) {
-        res = sql.replaceInto(info,this,nonNullFields,true);
+    if ( forceInsert || id->isNull() ) {
+        res = sql.insertInto(info,this,nonNullFields,true);
     } else {
         res = sql.replaceInto(info,this,nonNullFields,false);
     }

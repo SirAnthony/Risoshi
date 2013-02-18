@@ -27,6 +27,8 @@ RTabWidget::RTabWidget(QWidget *parent) :
     connection->addModel<Article>();
     // Create table for all added model
     connection->createTables();
+
+    tabSwitch( ui->ViewTab );
 }
 
 
@@ -40,4 +42,15 @@ RTabWidget::~RTabWidget()
     // FIXME: check for db was opened
     db.close();
     delete ui;
+}
+
+void RTabWidget::tabSwitch(QWidget *arg1)
+{
+    db.commit();
+    if( arg1 == ui->ViewTab ){
+        viewModel.setQuery( "SELECT * FROM Article;" );
+        while( viewModel.canFetchMore() )
+            viewModel.fetchMore();
+    }
+    arg1->update();
 }

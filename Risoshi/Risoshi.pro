@@ -11,18 +11,24 @@ greaterThan(QT_MAJOR_VERSION, 4): QT += widgets
 TARGET = Risoshi
 TEMPLATE = app
 
+QMAKE_CXXFLAGS += -Wno-invalid-offsetof
 
 SOURCES += main.cpp\
         mainwindow.cpp \
     rtabwidget.cpp \
-    models.cpp
+    models.cpp \
+    raddwidget.cpp \
+    rtableview.cpp
 
 HEADERS  += mainwindow.h \
     rtabwidget.h \
-    models.h
+    models.h \
+    raddwidget.h \
+    rtableview.h
 
 FORMS    += mainwindow.ui \
-    rtabwidget.ui
+    rtabwidget.ui \
+    raddwidget.ui
 
 
 

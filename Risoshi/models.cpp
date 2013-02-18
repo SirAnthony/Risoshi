@@ -2,5 +2,5 @@
 
 bool Article::clean( )
 {
-    return false;
+    return true;
 }

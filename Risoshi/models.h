@@ -13,6 +13,7 @@ public:
     DQField<QString> mag;
     DQField<int> volume;
     DQField<int> issue;
+    DQField<int> year;
     DQField<QString> abstract;
 
     /// Model fields validation
@@ -27,6 +28,7 @@ DQ_DECLARE_MODEL(Article,
     DQ_FIELD(mag, DQNotNull),
     DQ_FIELD(volume, DQNotNull),
     DQ_FIELD(issue, DQNotNull),
+    DQ_FIELD(year, DQNotNull),
     DQ_FIELD(abstract, DQNotNull)
 )
 
