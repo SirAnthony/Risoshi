@@ -10,6 +10,7 @@ RTabWidget::RTabWidget(QWidget *parent) :
 {
     ui->setupUi(this);
     ui->ViewTable->setModel(&viewModel);
+    ui->AddWidget->setModel(&viewModel);
 
     db.setDatabaseName("db.sqlite");
 
@@ -29,7 +30,10 @@ RTabWidget::RTabWidget(QWidget *parent) :
     connection->createTables();
 
     tabSwitch( ui->ViewTab );
+
+    connect( ui->ViewTable, SIGNAL(toggleEdit()), this, SLOT(toggleEdit()) );
 }
+
 
 
 RTabWidget::~RTabWidget()
@@ -48,9 +52,16 @@ void RTabWidget::tabSwitch(QWidget *arg1)
 {
     db.commit();
     if( arg1 == ui->ViewTab ){
-        viewModel.setQuery( "SELECT * FROM Article;" );
-        while( viewModel.canFetchMore() )
-            viewModel.fetchMore();
+        viewModel.clearCurrent();
+        emit viewModel.update();
+    }else{
+        emit ui->AddWidget->load();
     }
     arg1->update();
+}
+
+
+void RTabWidget::toggleEdit()
+{
+    this->setCurrentIndex(1);
 }

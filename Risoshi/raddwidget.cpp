@@ -1,6 +1,5 @@
 #include "raddwidget.h"
 #include "ui_raddwidget.h"
-#include "models.h"
 #include <QSqlError>
 #include <QMessageBox>
 
@@ -9,7 +8,7 @@ RAddWidget::RAddWidget(QWidget *parent) :
     ui(new Ui::RAddWidget)
 {
     ui->setupUi(this);
-    newRecord = true;
+    Model = NULL;
 }
 
 RAddWidget::~RAddWidget()
@@ -17,25 +16,66 @@ RAddWidget::~RAddWidget()
     delete ui;
 }
 
+void RAddWidget::setModel(RSqlQueryModel *m)
+{
+    Model = m;
+}
+
+RSqlQueryModel *RAddWidget::model() const
+{
+    return Model;
+}
+
+void RAddWidget::load()
+{
+    if( !Model ){
+        qDebug() << "Model was not set.";
+        return;
+    }
+
+    Article* current = Model->getCurrent();
+    if( current == NULL ){
+        this->clear();
+    }else{
+        ui->titleEdit->setText(current->title);
+        ui->linkEdit->setText(current->link);
+        ui->magEdit->setText(current->mag);
+        ui->volumeEdit->setValue(current->volume);
+        ui->issueEdit->setValue(current->issue);
+        ui->yearEdit->setValue(current->year);
+        ui->abstractEdit->setPlainText(current->abstract);
+    }
+}
+
 void RAddWidget::save()
 {
-    Article atc;
-    atc.title = ui->titleEdit->text();
-    atc.link = ui->linkEdit->text();
-    atc.mag = ui->magEdit->text();
-    atc.volume = ui->volumeEdit->value();
-    atc.issue = ui->issueEdit->value();
-    atc.year = ui->yearEdit->value();
-    atc.abstract = ui->abstractEdit->toPlainText();
-
-    if( atc.save(newRecord) )
+    if( !Model ){
+        qDebug() << "Model was not set.";
         return;
+    }
+
+    Article* current = Model->getCurrent();
+
+    if( current == NULL )
+        current = new Article();
+
+    current->title = ui->titleEdit->text();
+    current->link = ui->linkEdit->text();
+    current->mag = ui->magEdit->text();
+    current->volume = ui->volumeEdit->value();
+    current->issue = ui->issueEdit->value();
+    current->year = ui->yearEdit->value();
+    current->abstract = ui->abstractEdit->toPlainText();
+
+    if( current->save() )
+        return;
+
     QString error = tr("Error while article saving.\n");
-    error += atc.connection().lastQuery().lastError().text();
+    error += current->connection().lastQuery().lastError().text();
     qDebug() << error;
-    qDebug() << atc.connection().lastQuery().lastQuery();
-    qDebug() << atc.connection().lastQuery().boundValues();
-    qDebug() << "Error type: " << atc.connection().lastQuery().lastError().type();
+    qDebug() << current->connection().lastQuery().lastQuery();
+    qDebug() << current->connection().lastQuery().boundValues();
+    qDebug() << "Error type: " << current->connection().lastQuery().lastError().type();
 
     QMessageBox::information( this, tr("Error"), error, QMessageBox::Ok );
 
@@ -43,6 +83,9 @@ void RAddWidget::save()
 
 void RAddWidget::clear()
 {
+    if( Model )
+        Model->clearCurrent();
+
     ui->titleEdit->clear();
     ui->linkEdit->clear();
     ui->magEdit->clear();

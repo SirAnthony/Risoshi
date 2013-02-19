@@ -3,7 +3,7 @@
 
 #include <QTabWidget>
 #include <QtSql>
-#include <QSqlQueryModel>
+#include "rsqlquerymodel.h"
 
 class DQConnection;
 
@@ -20,12 +20,13 @@ public:
     explicit RTabWidget(QWidget *parent = 0);
     ~RTabWidget();
 
-private slots:
+private slots:    
     void tabSwitch(QWidget *arg1);
+    void toggleEdit();
 
 private:
     Ui::RTabWidget *ui;    
-    QSqlQueryModel viewModel;
+    RSqlQueryModel viewModel;
     QSqlDatabase db;    
     DQConnection* connection;
 

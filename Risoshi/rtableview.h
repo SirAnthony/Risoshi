@@ -2,10 +2,8 @@
 #define RTABLEVIEW_H
 
 #include <QTableView>
+#include <QSignalMapper>
 
-namespace Ui {
-class RTableView;
-}
 
 class RTableView : public QTableView
 {
@@ -14,9 +12,19 @@ class RTableView : public QTableView
 public:
     explicit RTableView(QWidget *parent = 0);
     ~RTableView();
-    
+
+signals:
+    void toggleEdit();
+
+public slots:
+    void contextMenuShow(const QPoint &);
+    void editRow(int row);
+    void removeRow( int );
+
 private:
-    Ui::RTableView *ui;
+    QSignalMapper removemapper;
+    QSignalMapper editmapper;
+
 };
 
 #endif // RTABLEVIEW_H

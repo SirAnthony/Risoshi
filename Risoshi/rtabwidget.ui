@@ -50,7 +50,7 @@
    </attribute>
    <layout class="QVBoxLayout" name="verticalLayout">
     <item>
-     <widget class="RAddWidget" name="verticalWidget" native="true">
+     <widget class="RAddWidget" name="AddWidget" native="true">
       <property name="sizePolicy">
        <sizepolicy hsizetype="Preferred" vsizetype="Expanding">
         <horstretch>0</horstretch>

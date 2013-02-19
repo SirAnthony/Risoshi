@@ -18,13 +18,15 @@ SOURCES += main.cpp\
     rtabwidget.cpp \
     models.cpp \
     raddwidget.cpp \
-    rtableview.cpp
+    rtableview.cpp \
+    rsqlquerymodel.cpp
 
 HEADERS  += mainwindow.h \
     rtabwidget.h \
     models.h \
     raddwidget.h \
-    rtableview.h
+    rtableview.h \
+    rsqlquerymodel.h
 
 FORMS    += mainwindow.ui \
     rtabwidget.ui \
