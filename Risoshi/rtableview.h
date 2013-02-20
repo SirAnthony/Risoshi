@@ -3,6 +3,7 @@
 
 #include <QTableView>
 #include <QSignalMapper>
+#include <QMenu>
 
 
 class RTableView : public QTableView
@@ -18,16 +19,17 @@ signals:
 
 public slots:
     void contextMenuShow(const QPoint &);
+    void menuAction(const QString &);
     void addRow( );
     void editRow(int row);
     void removeRow( int );
 
-
-
 private:
-    QSignalMapper removemapper;
-    QSignalMapper editmapper;
+    QMenu menu;
+    enum MenuEntries { mAdd, mEdit, mRemove, mLast };
+    QAction* actions[mLast];
 
+    QSignalMapper mapper;
 };
 
 #endif // RTABLEVIEW_H

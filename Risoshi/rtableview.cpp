@@ -2,8 +2,6 @@
 #include "rsqlquerymodel.h"
 #include "rtabwidget.h"
 #include <QHeaderView>
-#include <QMenu>
-
 
 RTableView::RTableView(QWidget *parent) :
     QTableView(parent)
@@ -24,9 +22,15 @@ RTableView::RTableView(QWidget *parent) :
     this->setContextMenuPolicy( Qt::CustomContextMenu );
     connect( this, SIGNAL(customContextMenuRequested(const QPoint &)), this, SLOT(contextMenuShow(const QPoint &)) );
 
-    // Map mapper to row removing
-    connect( &removemapper, SIGNAL(mapped(int)), this, SLOT(removeRow(int)) );
-    connect( &editmapper, SIGNAL(mapped(int)), this, SLOT(editRow(int)) );
+    // Menu
+    QString menuNames[mLast] = { "Add", "Edit", "Remove" };
+    for( int var = 0; var < mLast; ++var ){
+        QAction* action = menu.addAction(menuNames[var]);
+        connect( action, SIGNAL(triggered()), &mapper, SLOT(map()) );
+        actions[var] = action;
+    }
+
+    connect( &mapper, SIGNAL(mapped(const QString &)), this, SLOT(menuAction(const QString &)) );
 }
 
 RTableView::~RTableView()
@@ -35,25 +39,34 @@ RTableView::~RTableView()
 }
 
 void RTableView::contextMenuShow( const QPoint& pos )
-{
-    QMenu menu;
+{    
     // Change item
     int row = this->rowAt( pos.y() );
 
-    QAction* addaction = menu.addAction("Add");
-    connect( addaction, SIGNAL(triggered()), this, SLOT(addRow()) );
-
-    if( row >= 0 ){
-        QAction* removeaction = menu.addAction("Remove");
-        connect( removeaction, SIGNAL(triggered()), &removemapper, SLOT(map()) );
-        removemapper.setMapping( removeaction, row );
-
-        QAction* editaction = menu.addAction("Edit");
-        connect( editaction, SIGNAL(triggered()), &editmapper, SLOT(map()) );
-        editmapper.setMapping( editaction, row );
+    for( int var = 0; var < mLast; ++var ){
+        actions[var]->setVisible( !var || row >= 0 );
+        mapper.setMapping( actions[var], QString("%1-%2").arg(var).arg(row) );
     }
 
     menu.exec( mapToGlobal(pos) );
+}
+
+void RTableView::menuAction( const QString & str )
+{
+    QStringList tmp = str.split("-");
+    int entry = tmp.at(0).toInt();
+    int row = tmp.at(1).toInt();
+    switch( entry ){
+        case mAdd:
+            emit addRow();
+            break;
+        case mEdit:
+            emit editRow(row);
+            break;
+        case mRemove:
+            emit removeRow(row);
+            break;
+    }
 }
 
 void RTableView::addRow()
