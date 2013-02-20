@@ -39,19 +39,26 @@ void RTableView::contextMenuShow( const QPoint& pos )
     QMenu menu;
     // Change item
     int row = this->rowAt( pos.y() );
-    if( row < 0 )
-        return;
 
+    QAction* addaction = menu.addAction("Add");
+    connect( addaction, SIGNAL(triggered()), this, SLOT(addRow()) );
 
-    QAction* removeaction = menu.addAction("Remove");
-    connect( removeaction, SIGNAL(triggered()), &removemapper, SLOT(map()) );
-    removemapper.setMapping( removeaction, row );
+    if( row >= 0 ){
+        QAction* removeaction = menu.addAction("Remove");
+        connect( removeaction, SIGNAL(triggered()), &removemapper, SLOT(map()) );
+        removemapper.setMapping( removeaction, row );
 
-    QAction* editaction = menu.addAction("Edit");
-    connect( editaction, SIGNAL(triggered()), &editmapper, SLOT(map()) );
-    editmapper.setMapping( editaction, row );
+        QAction* editaction = menu.addAction("Edit");
+        connect( editaction, SIGNAL(triggered()), &editmapper, SLOT(map()) );
+        editmapper.setMapping( editaction, row );
+    }
 
     menu.exec( mapToGlobal(pos) );
+}
+
+void RTableView::addRow()
+{
+    emit toggleEdit();
 }
 
 void RTableView::editRow( int row )

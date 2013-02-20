@@ -166,8 +166,8 @@ public:
   @see DQUnique
   @see DQDefault
  */
-#define DQ_FIELD(field , CLAUSE...) \
-new DQModelMetaInfoField(#field,offsetof(Table,field),m.field.type(), m.field.clause(), ## CLAUSE)
+#define DQ_FIELD(field , ...) \
+new DQModelMetaInfoField(#field,offsetof(Table,field),m.field.type(), m.field.clause(), ## __VA_ARGS__)
 
 /**
   See tests/modes/model1.h
@@ -245,18 +245,18 @@ DQ_DECLARE_MODEL(User,
 @see DQ_MODEL
 @see DQ_FIELD
  */
-#define DQ_DECLARE_MODEL(MODEL,NAME,FIELDS...) \
+#define DQ_DECLARE_MODEL(MODEL,NAME,...) \
         DQ_DECLARE_MODEL_BEGIN(MODEL,NAME) \
             result << DQModelMetaInfoHelper<DQModel>::fields(); \
-            DQModelMetaInfoField* list[] = { FIELDS,0 }; \
+            DQModelMetaInfoField* list[] = { __VA_ARGS__,0 }; \
             result << _dqMetaInfoCreateFields(list) ; \
         DQ_DECLARE_MODEL_END(MODEL,NAME)
 
 /// Declare a model which is not a direct sub-class of DQModel
-#define DQ_DECLARE_MODEL2(MODEL,NAME,PARENT,FIELDS...) \
+#define DQ_DECLARE_MODEL2(MODEL,NAME,PARENT,...) \
         DQ_DECLARE_MODEL_BEGIN(MODEL,NAME) \
             result << DQModelMetaInfoHelper<PARENT>::fields(); \
-            DQModelMetaInfoField* list[] = { FIELDS,0 }; \
+            DQModelMetaInfoField* list[] = { __VA_ARGS__,0 }; \
             result << _dqMetaInfoCreateFields(list) ; \
         DQ_DECLARE_MODEL_END(MODEL,NAME)
 

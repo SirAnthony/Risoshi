@@ -18,8 +18,11 @@ signals:
 
 public slots:
     void contextMenuShow(const QPoint &);
+    void addRow( );
     void editRow(int row);
     void removeRow( int );
+
+
 
 private:
     QSignalMapper removemapper;

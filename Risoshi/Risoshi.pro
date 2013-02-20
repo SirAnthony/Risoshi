@@ -11,7 +11,7 @@ greaterThan(QT_MAJOR_VERSION, 4): QT += widgets
 TARGET = Risoshi
 TEMPLATE = app
 
-QMAKE_CXXFLAGS += -Wno-invalid-offsetof
+unix: QMAKE_CXXFLAGS += -Wno-invalid-offsetof
 
 SOURCES += main.cpp\
         mainwindow.cpp \
@@ -19,18 +19,21 @@ SOURCES += main.cpp\
     models.cpp \
     raddwidget.cpp \
     rtableview.cpp \
-    rsqlquerymodel.cpp
+    rsqlquerymodel.cpp \
+    rfilewidget.cpp
 
 HEADERS  += mainwindow.h \
     rtabwidget.h \
     models.h \
     raddwidget.h \
     rtableview.h \
-    rsqlquerymodel.h
+    rsqlquerymodel.h \
+    rfilewidget.h
 
 FORMS    += mainwindow.ui \
     rtabwidget.ui \
-    raddwidget.ui
+    raddwidget.ui \
+    rfilewidget.ui
 
 
 

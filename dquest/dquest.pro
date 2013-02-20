@@ -2,7 +2,7 @@ INCLUDEPATH += $$PWD
 
 QT += sql
 
-QMAKE_CXXFLAGS += -Wno-invalid-offsetof
+unix: QMAKE_CXXFLAGS += -Wno-invalid-offsetof
 
 TEMPLATE = lib
 TARGET = dquest

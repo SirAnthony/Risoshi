@@ -2,7 +2,7 @@ INCLUDEPATH += $$PWD
 DEPENDPATH += $$PWD
 QT += sql
 
-QMAKE_CXXFLAGS += -Wno-invalid-offsetof
+unix: QMAKE_CXXFLAGS += -Wno-invalid-offsetof
 
 DQUEST_HEADERS += \
     $$PWD/dqclause.h \

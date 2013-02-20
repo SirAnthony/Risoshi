@@ -1,7 +1,7 @@
 #include "raddwidget.h"
 #include "ui_raddwidget.h"
 #include <QSqlError>
-#include <QMessageBox>
+
 
 RAddWidget::RAddWidget(QWidget *parent) :
     QWidget(parent),
@@ -44,6 +44,7 @@ void RAddWidget::load()
         ui->issueEdit->setValue(current->issue);
         ui->yearEdit->setValue(current->year);
         ui->abstractEdit->setPlainText(current->abstract);
+        ui->fileEdit->load(current->file);
     }
 }
 
@@ -59,26 +60,31 @@ void RAddWidget::save()
     if( current == NULL )
         current = new Article();
 
-    current->title = ui->titleEdit->text();
+    QString title = ui->titleEdit->text();
+    QString mag = ui->magEdit->text();
+    int year = ui->yearEdit->value();
+
+    current->title = title;
     current->link = ui->linkEdit->text();
-    current->mag = ui->magEdit->text();
+    current->mag = mag;
     current->volume = ui->volumeEdit->value();
     current->issue = ui->issueEdit->value();
-    current->year = ui->yearEdit->value();
+    current->year = year;
     current->abstract = ui->abstractEdit->toPlainText();
+
+    QString filename = ui->fileEdit->save( title.left(80) + "_" + mag.left(15) + "_" + QString::number(year) );
+    if( filename != "" )
+        current->file = filename;
+
 
     if( current->save() )
         return;
 
-    QString error = tr("Error while article saving.\n");
-    error += current->connection().lastQuery().lastError().text();
-    qDebug() << error;
+    qDebug() << "Error while article saving.\n";
+    qDebug() << current->connection().lastQuery().lastError().text();
     qDebug() << current->connection().lastQuery().lastQuery();
     qDebug() << current->connection().lastQuery().boundValues();
     qDebug() << "Error type: " << current->connection().lastQuery().lastError().type();
-
-    QMessageBox::information( this, tr("Error"), error, QMessageBox::Ok );
-
 }
 
 void RAddWidget::clear()
@@ -93,4 +99,5 @@ void RAddWidget::clear()
     ui->issueEdit->setValue(1);
     ui->yearEdit->setValue(2000);
     ui->abstractEdit->clear();
+    ui->fileEdit->load("");
 }
