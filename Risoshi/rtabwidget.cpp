@@ -65,3 +65,8 @@ void RTabWidget::toggleEdit()
 {
     this->setCurrentIndex(1);
 }
+
+void RTabWidget::toggleView()
+{
+    this->setCurrentIndex(0);
+}

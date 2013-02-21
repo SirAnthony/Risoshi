@@ -1,6 +1,13 @@
 #include "raddwidget.h"
 #include "ui_raddwidget.h"
 #include <QSqlError>
+#include <QShortcut>
+
+
+QString capitalize( const QString & str )
+{
+    return str.left(1).toUpper()+str.mid(1).toLower();
+}
 
 
 RAddWidget::RAddWidget(QWidget *parent) :
@@ -9,6 +16,10 @@ RAddWidget::RAddWidget(QWidget *parent) :
 {
     ui->setupUi(this);
     Model = NULL;
+
+    QShortcut* shortcut = new QShortcut(QKeySequence(tr("Ctrl+S", "File|Open")), this);
+    connect( shortcut, SIGNAL(activated()), this, SLOT(save()) );
+    shortcut->setContext( Qt::WidgetWithChildrenShortcut );
 }
 
 RAddWidget::~RAddWidget()
@@ -60,17 +71,17 @@ void RAddWidget::save()
     if( current == NULL )
         current = new Article();
 
-    QString title = ui->titleEdit->text();
-    QString mag = ui->magEdit->text();
+    QString title = capitalize(ui->titleEdit->text().trimmed());
+    QString mag = capitalize(ui->magEdit->text().trimmed());
     int year = ui->yearEdit->value();
 
     current->title = title;
-    current->link = ui->linkEdit->text();
+    current->link = ui->linkEdit->text().trimmed();
     current->mag = mag;
     current->volume = ui->volumeEdit->value();
     current->issue = ui->issueEdit->value();
     current->year = year;
-    current->abstract = ui->abstractEdit->toPlainText();
+    current->abstract = ui->abstractEdit->toPlainText().trimmed();
 
     QString filename = ui->fileEdit->save( title.left(80) + "_" + mag.left(15) + "_" + QString::number(year) );
     if( filename != "" )
@@ -80,11 +91,10 @@ void RAddWidget::save()
     if( current->save() )
         return;
 
-    qDebug() << "Error while article saving.\n";
-    qDebug() << current->connection().lastQuery().lastError().text();
-    qDebug() << current->connection().lastQuery().lastQuery();
-    qDebug() << current->connection().lastQuery().boundValues();
-    qDebug() << "Error type: " << current->connection().lastQuery().lastError().type();
+    qDebug() << "Error while article saving:\n" << current->connection().lastQuery().lastError().text();
+    //qDebug() << current->connection().lastQuery().lastQuery();
+    //qDebug() << current->connection().lastQuery().boundValues();
+    //qDebug() << "Error type: " << current->connection().lastQuery().lastError().type();
 }
 
 void RAddWidget::clear()

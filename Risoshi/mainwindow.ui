@@ -32,11 +32,38 @@
      <x>0</x>
      <y>0</y>
      <width>872</width>
-     <height>21</height>
+     <height>22</height>
     </rect>
    </property>
+   <widget class="QMenu" name="menuRecord">
+    <property name="title">
+     <string>Record</string>
+    </property>
+    <addaction name="actionAdd_new"/>
+    <addaction name="actionView_all"/>
+   </widget>
+   <addaction name="menuRecord"/>
   </widget>
   <widget class="QStatusBar" name="statusBar"/>
+  <action name="actionAdd_new">
+   <property name="text">
+    <string>&amp;Add new</string>
+   </property>
+   <property name="shortcut">
+    <string>Ctrl+A</string>
+   </property>
+  </action>
+  <action name="actionView_all">
+   <property name="text">
+    <string>Lis&amp;t all</string>
+   </property>
+   <property name="toolTip">
+    <string>List all</string>
+   </property>
+   <property name="shortcut">
+    <string>Ctrl+T</string>
+   </property>
+  </action>
  </widget>
  <layoutdefault spacing="6" margin="11"/>
  <customwidgets>
@@ -45,8 +72,45 @@
    <extends>QTabWidget</extends>
    <header>rtabwidget.h</header>
    <container>1</container>
+   <slots>
+    <slot>toggleEdit()</slot>
+    <slot>toggleView()</slot>
+   </slots>
   </customwidget>
  </customwidgets>
  <resources/>
- <connections/>
+ <connections>
+  <connection>
+   <sender>actionAdd_new</sender>
+   <signal>activated()</signal>
+   <receiver>verticalTabWidget</receiver>
+   <slot>toggleEdit()</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>-1</x>
+     <y>-1</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>435</x>
+     <y>233</y>
+    </hint>
+   </hints>
+  </connection>
+  <connection>
+   <sender>actionView_all</sender>
+   <signal>activated()</signal>
+   <receiver>verticalTabWidget</receiver>
+   <slot>toggleView()</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>-1</x>
+     <y>-1</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>435</x>
+     <y>233</y>
+    </hint>
+   </hints>
+  </connection>
+ </connections>
 </ui>

@@ -23,8 +23,8 @@ QString RFileWidget::save( QString name )
     QFileInfo sourceInfo(sourceFile);
 
     if( name == "" || !sourceFile.exists() ){
-        qDebug() << "Cannot create file '" << name << "'.";
-        qDebug() << "Name is empty or file " << sourceInfo.absolutePath() << " does not exists.";
+        qDebug() << "Cannot create file '" << name << "'.\n"
+                 << "Name is empty or file '" << sourceInfo.absolutePath() << "' does not exists.";
         return "";
     }
 

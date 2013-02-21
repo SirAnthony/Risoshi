@@ -23,6 +23,7 @@ public:
 private slots:    
     void tabSwitch(QWidget *arg1);
     void toggleEdit();
+    void toggleView();
 
 private:
     Ui::RTabWidget *ui;    
