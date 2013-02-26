@@ -23,7 +23,7 @@
    <enum>QTabWidget::Rounded</enum>
   </property>
   <property name="currentIndex">
-   <number>2</number>
+   <number>0</number>
   </property>
   <property name="elideMode">
    <enum>Qt::ElideNone</enum>
@@ -89,6 +89,9 @@
    <class>RTableView</class>
    <extends>QTableView</extends>
    <header>rtableview.h</header>
+   <slots>
+    <slot>openFile(QModelIndex)</slot>
+   </slots>
   </customwidget>
   <customwidget>
    <class>RMergeWidget</class>
@@ -112,6 +115,22 @@
     <hint type="destinationlabel">
      <x>643</x>
      <y>174</y>
+    </hint>
+   </hints>
+  </connection>
+  <connection>
+   <sender>ViewTable</sender>
+   <signal>doubleClicked(QModelIndex)</signal>
+   <receiver>ViewTable</receiver>
+   <slot>openFile(QModelIndex)</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>57</x>
+     <y>41</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>109</x>
+     <y>104</y>
     </hint>
    </hints>
   </connection>

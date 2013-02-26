@@ -2,6 +2,7 @@
 #include "rsqlquerymodel.h"
 #include "rtabwidget.h"
 #include <QHeaderView>
+#include <QDesktopServices>
 
 RTableView::RTableView(QWidget *parent) :
     QTableView(parent)
@@ -97,5 +98,12 @@ void RTableView::removeRow( int row )
     model->removeCurrent();
     emit model->update();
 
+}
+
+void RTableView::openFile(const QModelIndex & index)
+{
+    int row = index.row();
+    const QModelIndex& file_index = this->model()->index(row, 6);
+    QDesktopServices::openUrl(QUrl("file://./" + file_index.data().toString(), QUrl::TolerantMode));
 }
 

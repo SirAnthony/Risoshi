@@ -17,12 +17,16 @@ public:
 signals:
     void toggleEdit();
 
+
 public slots:
     void contextMenuShow(const QPoint &);
     void menuAction(const QString &);
     void addRow( );
     void editRow(int row);
     void removeRow( int );
+
+private slots:
+    void openFile(const QModelIndex&);
 
 private:
     QMenu menu;
