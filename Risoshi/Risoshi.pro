@@ -20,7 +20,10 @@ SOURCES += main.cpp\
     raddwidget.cpp \
     rtableview.cpp \
     rsqlquerymodel.cpp \
-    rfilewidget.cpp
+    rfilewidget.cpp \
+    rfilenamewidget.cpp \
+    rmergewidget.cpp \
+    rmergesqlquerymodel.cpp
 
 HEADERS  += mainwindow.h \
     rtabwidget.h \
@@ -28,12 +31,17 @@ HEADERS  += mainwindow.h \
     raddwidget.h \
     rtableview.h \
     rsqlquerymodel.h \
-    rfilewidget.h
+    rfilewidget.h \
+    rfilenamewidget.h \
+    rmergewidget.h \
+    rmergesqlquerymodel.h
 
 FORMS    += mainwindow.ui \
     rtabwidget.ui \
     raddwidget.ui \
-    rfilewidget.ui
+    rfilewidget.ui \
+    rfilenamewidget.ui \
+    rmergewidget.ui
 
 
 

@@ -1,0 +1,92 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ui version="4.0">
+ <class>RMergeWidget</class>
+ <widget class="QWidget" name="RMergeWidget">
+  <property name="geometry">
+   <rect>
+    <x>0</x>
+    <y>0</y>
+    <width>646</width>
+    <height>439</height>
+   </rect>
+  </property>
+  <property name="windowTitle">
+   <string>Form</string>
+  </property>
+  <layout class="QVBoxLayout" name="verticalLayout">
+   <item>
+    <layout class="QHBoxLayout" name="horizontalLayout_2">
+     <item>
+      <widget class="RFileNameWidget" name="verticalWidget" native="true"/>
+     </item>
+     <item>
+      <widget class="QPushButton" name="pushButton">
+       <property name="sizePolicy">
+        <sizepolicy hsizetype="Maximum" vsizetype="Fixed">
+         <horstretch>0</horstretch>
+         <verstretch>0</verstretch>
+        </sizepolicy>
+       </property>
+       <property name="text">
+        <string>Merge</string>
+       </property>
+      </widget>
+     </item>
+    </layout>
+   </item>
+   <item>
+    <widget class="QTableView" name="mergeView"/>
+   </item>
+  </layout>
+ </widget>
+ <customwidgets>
+  <customwidget>
+   <class>RFileNameWidget</class>
+   <extends>QWidget</extends>
+   <header>rfilenamewidget.h</header>
+   <container>1</container>
+   <slots>
+    <signal>valueChanged(QString)</signal>
+   </slots>
+  </customwidget>
+ </customwidgets>
+ <resources/>
+ <connections>
+  <connection>
+   <sender>verticalWidget</sender>
+   <signal>valueChanged(QString)</signal>
+   <receiver>RMergeWidget</receiver>
+   <slot>updateView(QString)</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>313</x>
+     <y>24</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>320</x>
+     <y>39</y>
+    </hint>
+   </hints>
+  </connection>
+  <connection>
+   <sender>pushButton</sender>
+   <signal>clicked()</signal>
+   <receiver>RMergeWidget</receiver>
+   <slot>merge()</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>608</x>
+     <y>25</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>641</x>
+     <y>37</y>
+    </hint>
+   </hints>
+  </connection>
+ </connections>
+ <slots>
+  <slot>updateView(QString)</slot>
+  <slot>merge()</slot>
+ </slots>
+</ui>

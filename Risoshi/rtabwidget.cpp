@@ -54,7 +54,7 @@ void RTabWidget::tabSwitch(QWidget *arg1)
     if( arg1 == ui->ViewTab ){
         viewModel.clearCurrent();
         emit viewModel.update();
-    }else{
+    }else if( arg1 == ui->EditTab ){
         emit ui->AddWidget->load();
     }
     arg1->update();

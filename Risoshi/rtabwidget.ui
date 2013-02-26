@@ -23,7 +23,7 @@
    <enum>QTabWidget::Rounded</enum>
   </property>
   <property name="currentIndex">
-   <number>0</number>
+   <number>2</number>
   </property>
   <property name="elideMode">
    <enum>Qt::ElideNone</enum>
@@ -67,6 +67,16 @@
     </item>
    </layout>
   </widget>
+  <widget class="QWidget" name="MergeTab">
+   <attribute name="title">
+    <string>Merge</string>
+   </attribute>
+   <layout class="QVBoxLayout" name="verticalLayout_2">
+    <item>
+     <widget class="RMergeWidget" name="verticalWidget" native="true"/>
+    </item>
+   </layout>
+  </widget>
  </widget>
  <customwidgets>
   <customwidget>
@@ -79,6 +89,12 @@
    <class>RTableView</class>
    <extends>QTableView</extends>
    <header>rtableview.h</header>
+  </customwidget>
+  <customwidget>
+   <class>RMergeWidget</class>
+   <extends>QWidget</extends>
+   <header>rmergewidget.h</header>
+   <container>1</container>
   </customwidget>
  </customwidgets>
  <resources/>
