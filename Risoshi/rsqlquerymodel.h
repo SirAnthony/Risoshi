@@ -13,6 +13,7 @@ public:
 
     Article* getCurrent( );
     void setCurrent( int id );
+    void setCurrent( QString name );
     void clearCurrent( );
     void removeCurrent( );
     

@@ -20,6 +20,14 @@ void RSqlQueryModel::setCurrent( int id )
 }
 
 
+void RSqlQueryModel::setCurrent( QString name )
+{
+    this->clearCurrent();
+    current = new Article();
+    current->load( DQWhere("title") == name );
+}
+
+
 void RSqlQueryModel::clearCurrent()
 {
     if( !current )

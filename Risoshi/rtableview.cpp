@@ -81,8 +81,8 @@ void RTableView::editRow( int row )
     if( model == NULL )
         return;
 
-    int id = this->model()->data(this->model()->index(row, 0)).toInt();
-    model->setCurrent(id);
+    QString name = this->model()->data(this->model()->index(row, 0)).toString();
+    model->setCurrent( name );
     emit toggleEdit();
 }
 
@@ -93,8 +93,8 @@ void RTableView::removeRow( int row )
     if( model == NULL )
         return;
 
-    int id = this->model()->data(this->model()->index(row, 0)).toInt();
-    model->setCurrent( id );
+    QString name = this->model()->data(this->model()->index(row, 0)).toString();
+    model->setCurrent( name );
     model->removeCurrent();
     emit model->update();
 
