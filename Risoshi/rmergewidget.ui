@@ -35,7 +35,14 @@
     </layout>
    </item>
    <item>
-    <widget class="QTableView" name="mergeView"/>
+    <widget class="QTableView" name="mergeView">
+     <attribute name="horizontalHeaderCascadingSectionResizes">
+      <bool>true</bool>
+     </attribute>
+     <attribute name="horizontalHeaderStretchLastSection">
+      <bool>true</bool>
+     </attribute>
+    </widget>
    </item>
   </layout>
  </widget>

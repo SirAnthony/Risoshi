@@ -3,6 +3,7 @@
 
 #include <QTableView>
 #include <QSignalMapper>
+#include "rsqlquerymodel.h"
 #include <QMenu>
 
 
@@ -13,6 +14,8 @@ class RTableView : public QTableView
 public:
     explicit RTableView(QWidget *parent = 0);
     ~RTableView();
+    void setModel(RSqlQueryModel *model);
+
 
 signals:
     void toggleEdit();
@@ -32,6 +35,7 @@ private:
     QMenu menu;
     enum MenuEntries { mAdd, mEdit, mRemove, mLast };
     QAction* actions[mLast];
+    RSqlQueryModel* rmodel;
 
     QSignalMapper mapper;
 };

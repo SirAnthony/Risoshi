@@ -1,8 +1,9 @@
 #include "rtableview.h"
-#include "rsqlquerymodel.h"
 #include "rtabwidget.h"
 #include <QHeaderView>
 #include <QDesktopServices>
+#include <QSortFilterProxyModel>
+
 
 RTableView::RTableView(QWidget *parent) :
     QTableView(parent)
@@ -37,6 +38,14 @@ RTableView::RTableView(QWidget *parent) :
 RTableView::~RTableView()
 {
 
+}
+
+void RTableView::setModel(RSqlQueryModel *model)
+{
+    rmodel = model;
+    QSortFilterProxyModel* proxyModel = new QSortFilterProxyModel(this);
+    proxyModel->setSourceModel(rmodel);
+    QTableView::setModel(proxyModel);
 }
 
 void RTableView::contextMenuShow( const QPoint& pos )
@@ -77,26 +86,24 @@ void RTableView::addRow()
 
 void RTableView::editRow( int row )
 {
-    RSqlQueryModel* model = reinterpret_cast<RSqlQueryModel*>(this->model());
-    if( model == NULL )
+    if( rmodel == NULL )
         return;
 
     QString name = this->model()->data(this->model()->index(row, 0)).toString();
-    model->setCurrent( name );
+    rmodel->setCurrent( name );
     emit toggleEdit();
 }
 
 
 void RTableView::removeRow( int row )
 {
-    RSqlQueryModel* model = reinterpret_cast<RSqlQueryModel*>(this->model());
-    if( model == NULL )
+    if( rmodel == NULL )
         return;
 
     QString name = this->model()->data(this->model()->index(row, 0)).toString();
-    model->setCurrent( name );
-    model->removeCurrent();
-    emit model->update();
+    rmodel->setCurrent( name );
+    rmodel->removeCurrent();
+    emit rmodel->update();
 
 }
 
