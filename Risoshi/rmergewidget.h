@@ -15,6 +15,11 @@ class RMergeWidget : public QWidget
     Q_OBJECT
     
 public:
+
+    enum Columns { //mcId = 0,
+        mcTitle = 0, mcLink, mcMag, mcVolume, mcIssue, mcYear, mcFile, mcAbstract
+    };
+
     explicit RMergeWidget(QWidget *parent = 0);
     ~RMergeWidget();
 

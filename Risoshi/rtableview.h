@@ -10,8 +10,13 @@
 class RTableView : public QTableView
 {
     Q_OBJECT
-    
+
 public:
+
+    enum Columns {
+        cId = 0, cTitle, cLink, cMag, cVolume, cIssue, cYear, cFile, cAbstract
+    };
+
     explicit RTableView(QWidget *parent = 0);
     ~RTableView();
     void setModel(RSqlQueryModel *model);

@@ -17,7 +17,7 @@ RAddWidget::RAddWidget(QWidget *parent) :
     ui->setupUi(this);
     Model = NULL;
 
-    QShortcut* shortcut = new QShortcut(QKeySequence(tr("Ctrl+S", "File|Open")), this);
+    QShortcut* shortcut = new QShortcut(QKeySequence(tr("Ctrl+S", "Record|Save")), this);
     connect( shortcut, SIGNAL(activated()), this, SLOT(save()) );
     shortcut->setContext( Qt::WidgetWithChildrenShortcut );
 }

@@ -89,7 +89,7 @@ void RTableView::editRow( int row )
     if( rmodel == NULL )
         return;
 
-    QString name = this->model()->data(this->model()->index(row, 0)).toString();
+    QString name = this->model()->data(this->model()->index(row, cTitle)).toString();
     rmodel->setCurrent( name );
     emit toggleEdit();
 }
@@ -100,7 +100,7 @@ void RTableView::removeRow( int row )
     if( rmodel == NULL )
         return;
 
-    QString name = this->model()->data(this->model()->index(row, 0)).toString();
+    QString name = this->model()->data(this->model()->index(row, cTitle)).toString();
     rmodel->setCurrent( name );
     rmodel->removeCurrent();
     emit rmodel->update();
@@ -110,7 +110,7 @@ void RTableView::removeRow( int row )
 void RTableView::openFile(const QModelIndex & index)
 {
     int row = index.row();
-    const QModelIndex& file_index = this->model()->index(row, 6);
+    const QModelIndex& file_index = this->model()->index(row, cFile);
     QFileInfo file(file_index.data().toString());
     QDesktopServices::openUrl(QUrl("file://" + file.absoluteFilePath(), QUrl::TolerantMode));
 }

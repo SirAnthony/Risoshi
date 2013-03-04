@@ -75,11 +75,11 @@ void RMergeWidget::checkRecords()
             DQList<Article> link_objects = link_query.all();
             for( int i = 0; i < title_objects.size(); ++i ){
                 Article* atc = objects.at(j);
-                mergeModel.addExcluded(0, atc->title);
+                mergeModel.addExcluded(mcTitle, atc->title);
             }
             for( int i = 0; i < link_objects.size(); ++i ){
                 Article* atc = objects.at(j);
-                mergeModel.addExcluded(1, atc->link);
+                mergeModel.addExcluded(mcLink, atc->link);
            }
         }
     }
