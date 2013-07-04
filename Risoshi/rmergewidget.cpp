@@ -42,6 +42,8 @@ void RMergeWidget::updateView(QString path)
     connection->open(db);
     // Register a model to the connection
     connection->addModel<Article>();
+    connection->addModel<Category>();
+    connection->addModel<CategoryJoin>();
 
     mergeModel.setQuery("SELECT title,link,mag,volume,issue,year,file,abstract FROM Article;", db);
     checkRecords();
@@ -98,8 +100,4 @@ void RMergeWidget::merge()
    mergeList.clear();
    checkRecords();
 }
-
-
-
-
 

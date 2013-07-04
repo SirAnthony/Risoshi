@@ -83,7 +83,7 @@ void RAddWidget::save()
     current->year = year;
     current->abstract = ui->abstractEdit->toPlainText().trimmed();
 
-    QString filename = ui->fileEdit->save( title.left(80) + "_" + mag.left(15) + "_" + QString::number(year) );
+    QString filename = ui->fileEdit->save( title.left(30) + "_" + mag.left(15) + "_" + QString::number(year) );
     if( filename != "" )
         current->file = filename;
 

@@ -10,7 +10,7 @@ RTabWidget::RTabWidget(QWidget *parent) :
 {
     ui->setupUi(this);
     ui->ViewTable->setModel(&viewModel);
-    ui->AddWidget->setModel(&viewModel);
+    ui->AddWidget->setModel(&viewModel);    
 
     db.setDatabaseName("db.sqlite");
 
@@ -26,6 +26,8 @@ RTabWidget::RTabWidget(QWidget *parent) :
     connection->open(db);
     // Register a model to the connection
     connection->addModel<Article>();
+    connection->addModel<Category>();
+    connection->addModel<CategoryJoin>();
     // Create table for all added model
     connection->createTables();
 

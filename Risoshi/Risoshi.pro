@@ -23,7 +23,8 @@ SOURCES += main.cpp\
     rfilewidget.cpp \
     rfilenamewidget.cpp \
     rmergewidget.cpp \
-    rmergesqlquerymodel.cpp
+    rmergesqlquerymodel.cpp \
+    rcategoryview.cpp
 
 HEADERS  += mainwindow.h \
     rtabwidget.h \
@@ -34,7 +35,8 @@ HEADERS  += mainwindow.h \
     rfilewidget.h \
     rfilenamewidget.h \
     rmergewidget.h \
-    rmergesqlquerymodel.h
+    rmergesqlquerymodel.h \
+    rcategoryview.h
 
 FORMS    += mainwindow.ui \
     rtabwidget.ui \

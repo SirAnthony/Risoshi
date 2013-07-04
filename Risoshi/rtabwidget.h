@@ -27,7 +27,7 @@ private slots:
 
 private:
     Ui::RTabWidget *ui;    
-    RSqlQueryModel viewModel;
+    RSqlQueryModel viewModel;    
     QSqlDatabase db;
     DQConnection* connection;
 

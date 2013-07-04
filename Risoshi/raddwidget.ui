@@ -292,7 +292,7 @@
         </property>
         <layout class="QVBoxLayout" name="verticalLayout_3">
          <item>
-          <widget class="QTreeWidget" name="categoryWidget">
+          <widget class="RCategoryView" name="categoryWidget">
            <property name="sizePolicy">
             <sizepolicy hsizetype="MinimumExpanding" vsizetype="Expanding">
              <horstretch>0</horstretch>
@@ -311,23 +311,12 @@
              <height>16777215</height>
             </size>
            </property>
-           <attribute name="headerVisible">
+           <attribute name="headerDefaultSectionSize">
+            <number>0</number>
+           </attribute>
+           <attribute name="headerHighlightSections">
             <bool>false</bool>
            </attribute>
-           <attribute name="headerCascadingSectionResizes">
-            <bool>false</bool>
-           </attribute>
-           <attribute name="headerShowSortIndicator" stdset="0">
-            <bool>false</bool>
-           </attribute>
-           <attribute name="headerStretchLastSection">
-            <bool>true</bool>
-           </attribute>
-           <column>
-            <property name="text">
-             <string>Categories</string>
-            </property>
-           </column>
           </widget>
          </item>
          <item>
@@ -370,6 +359,11 @@
    <extends>QWidget</extends>
    <header>rfilewidget.h</header>
    <container>1</container>
+  </customwidget>
+  <customwidget>
+   <class>RCategoryView</class>
+   <extends>QTreeView</extends>
+   <header>rcategoryview.h</header>
   </customwidget>
  </customwidgets>
  <resources/>

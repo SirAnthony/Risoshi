@@ -25,8 +25,8 @@ public slots:
     void save();
     void clear();
 
-private:
-    RSqlQueryModel *Model;
+private:    
+    RSqlQueryModel *Model;    
     Ui::RAddWidget *ui;
 };
 
