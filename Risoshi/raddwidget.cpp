@@ -57,6 +57,8 @@ void RAddWidget::load()
         ui->abstractEdit->setPlainText(current->abstract);
         ui->fileEdit->load(current->file);
     }
+
+    emit ui->categoryWidget->load(current);
 }
 
 void RAddWidget::save()
@@ -83,13 +85,15 @@ void RAddWidget::save()
     current->year = year;
     current->abstract = ui->abstractEdit->toPlainText().trimmed();
 
-    QString filename = ui->fileEdit->save( title.left(30) + "_" + mag.left(15) + "_" + QString::number(year) );
+    QString filename = ui->fileEdit->save( title.left(60) + "_" + mag.left(15) + "_" + QString::number(year) );
     if( filename != "" )
         current->file = filename;
 
 
-    if( current->save() )
+    if( current->save() ){
+        emit ui->categoryWidget->save(current);
         return;
+    }
 
     qDebug() << "Error while article saving:\n" << current->connection().lastQuery().lastError().text();
     //qDebug() << current->connection().lastQuery().lastQuery();
@@ -101,6 +105,8 @@ void RAddWidget::clear()
 {
     if( Model )
         Model->clearCurrent();
+
+    emit ui->categoryWidget->load(NULL);
 
     ui->titleEdit->clear();
     ui->linkEdit->clear();

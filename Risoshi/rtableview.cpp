@@ -112,6 +112,6 @@ void RTableView::openFile(const QModelIndex & index)
     int row = index.row();
     const QModelIndex& file_index = this->model()->index(row, cFile);
     QFileInfo file(file_index.data().toString());
-    QDesktopServices::openUrl(QUrl("file://" + file.absoluteFilePath(), QUrl::TolerantMode));
+    QDesktopServices::openUrl(QUrl::fromLocalFile(file.absoluteFilePath()));
 }
 

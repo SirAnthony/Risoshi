@@ -32,7 +32,6 @@ class Category : public DQModel
     DQ_MODEL
 public:
     DQField<QString> title;
-    DQField<int> type;
     DQForeignKey<Category> parent;
 };
 
@@ -62,8 +61,7 @@ DQ_DECLARE_MODEL(Article,
 
 DQ_DECLARE_MODEL(Category,
     "Category", // the table name.
-    DQ_FIELD(title, DQNotNull | DQUnique),
-    DQ_FIELD(type, DQNotNull),
+    DQ_FIELD(title, DQNotNull),
     DQ_FIELD(parent)
 )
 
