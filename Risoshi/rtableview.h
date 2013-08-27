@@ -14,7 +14,7 @@ class RTableView : public QTableView
 public:
 
     enum Columns {
-        cId = 0, cTitle, cLink, cMag, cVolume, cIssue, cYear, cFile, cAbstract
+        cId = 0, cTitle, cAuthors, cLink, cMag, cVolume, cIssue, cYear, cKeywords, cFile, cAbstract
     };
 
     explicit RTableView(QWidget *parent = 0);
