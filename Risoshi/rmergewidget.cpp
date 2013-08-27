@@ -45,7 +45,7 @@ void RMergeWidget::updateView(QString path)
     connection->addModel<Category>();
     connection->addModel<CategoryJoin>();
 
-    mergeModel.setQuery("SELECT title,link,mag,volume,issue,year,file,abstract FROM Article;", db);
+    mergeModel.setQuery("SELECT title,authors,link,mag,volume,issue,year,keywords,file,abstract FROM Article;", db);
     checkRecords();
 }
 
@@ -64,12 +64,14 @@ void RMergeWidget::checkRecords()
         if( !title_query.count() && !link_query.count() ){
             Article* atc = new Article();
             atc->title = object->title;
+            atc->authors = object->authors;
             atc->link = object->link;
             atc->mag = object->mag;
             atc->volume = object->volume;
             atc->issue = object->issue;
             atc->year = object->year;
-            atc->abstract = object->abstract;
+            atc->keywords = object->keywords;
+            atc->abstract = object->abstract;            
             atc->file = object->file;
             mergeList.append(atc);
         }else{

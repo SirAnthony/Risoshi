@@ -49,11 +49,13 @@ void RAddWidget::load()
         this->clear();
     }else{
         ui->titleEdit->setText(current->title);
+        ui->authorsEdit->setText(current->authors);
         ui->linkEdit->setText(current->link);
         ui->magEdit->setText(current->mag);
         ui->volumeEdit->setValue(current->volume);
         ui->issueEdit->setValue(current->issue);
         ui->yearEdit->setValue(current->year);
+        ui->keywordsEdit->setText(current->keywords);
         ui->abstractEdit->setPlainText(current->abstract);
         ui->fileEdit->load(current->file);
     }
@@ -77,12 +79,14 @@ void RAddWidget::save()
     QString mag = capitalize(ui->magEdit->text().trimmed());
     int year = ui->yearEdit->value();
 
-    current->title = title;
+    current->title = title;    
+    current->authors = ui->authorsEdit->text().trimmed();
     current->link = ui->linkEdit->text().trimmed();
     current->mag = mag;
     current->volume = ui->volumeEdit->value();
     current->issue = ui->issueEdit->value();
     current->year = year;
+    current->keywords = ui->keywordsEdit->text().trimmed();
     current->abstract = ui->abstractEdit->toPlainText().trimmed();
 
     QString filename = ui->fileEdit->save( title.left(60) + "_" + mag.left(15) + "_" + QString::number(year) );
@@ -109,11 +113,13 @@ void RAddWidget::clear()
     emit ui->categoryWidget->load(NULL);
 
     ui->titleEdit->clear();
+    ui->authorsEdit->clear();
     ui->linkEdit->clear();
     ui->magEdit->clear();
     ui->volumeEdit->setValue(1);
     ui->issueEdit->setValue(1);
     ui->yearEdit->setValue(2000);
+    ui->keywordsEdit->clear();
     ui->abstractEdit->clear();
     ui->fileEdit->load("");
 }
