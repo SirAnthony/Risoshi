@@ -36,7 +36,8 @@ HEADERS  += mainwindow.h \
     rfilenamewidget.h \
     rmergewidget.h \
     rmergesqlquerymodel.h \
-    rcategoryview.h
+    rcategoryview.h \
+    utils.h
 
 FORMS    += mainwindow.ui \
     rtabwidget.ui \

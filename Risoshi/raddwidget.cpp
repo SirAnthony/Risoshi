@@ -1,5 +1,6 @@
 #include "raddwidget.h"
 #include "ui_raddwidget.h"
+#include "utils.h"
 #include <QSqlError>
 #include <QShortcut>
 
@@ -87,7 +88,7 @@ void RAddWidget::save()
     int year = ui->yearEdit->value();
 
     current->title = title;    
-    current->authors = capitalize(ui->authorsEdit->text().trimmed());
+    current->authors = ucfirst(ui->authorsEdit->text()).trimmed();
     current->link = ui->linkEdit->text().trimmed();
     current->type = Types[ui->typeEdit->currentIndex()];
     current->mag = mag;
@@ -96,7 +97,7 @@ void RAddWidget::save()
     current->year = year;
     current->first_page = ui->firstpageEdit->value();
     current->last_page = ui->lastpageEdit->value();
-    current->keywords = ui->keywordsEdit->text().trimmed();
+    current->keywords = ucfirst(ui->keywordsEdit->text()).trimmed();
     current->abstract = ui->abstractEdit->toPlainText().trimmed();
 
     QString filename = ui->fileEdit->save( title.left(60) + "_" + mag.left(15) + "_" + QString::number(year) );
