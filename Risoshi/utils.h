@@ -21,7 +21,7 @@ QString ucfirstsep( const QString str, const QString sep = " " )
 
 
 QString ucfirst(const QString str) {
-    return ucfirstsep(ucfirstsep(str.toLower(), ".").trimmed(), " ").trimmed();
+    return ucfirstsep(ucfirstsep(str, ".").trimmed(), " ").trimmed();
 }
 
 #endif // UTILS_H

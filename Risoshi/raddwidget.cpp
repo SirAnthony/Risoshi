@@ -88,7 +88,7 @@ void RAddWidget::save()
     int year = ui->yearEdit->value();
 
     current->title = title;    
-    current->authors = ucfirst(ui->authorsEdit->text()).trimmed();
+    current->authors = ucfirst(ui->authorsEdit->text().toLower()).trimmed();
     current->link = ui->linkEdit->text().trimmed();
     current->type = Types[ui->typeEdit->currentIndex()];
     current->mag = mag;
