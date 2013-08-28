@@ -23,7 +23,7 @@ RAddWidget::RAddWidget(QWidget *parent) :
 
     foreach( QString item, Types )
         ui->typeEdit->addItem(item);
-    ui->typeEdit->setCurrentIndex(index_from_type("paper"));
+    ui->typeEdit->setCurrentIndex(index_from_type("article"));
 }
 
 RAddWidget::~RAddWidget()
@@ -125,7 +125,7 @@ void RAddWidget::clear()
     ui->titleEdit->clear();
     ui->authorsEdit->clear();
     ui->linkEdit->clear();
-    ui->typeEdit->setCurrentIndex(index_from_type("paper"));
+    ui->typeEdit->setCurrentIndex(index_from_type("article"));
     ui->magEdit->clear();
     ui->volumeEdit->setValue(1);
     ui->issueEdit->setValue(1);
