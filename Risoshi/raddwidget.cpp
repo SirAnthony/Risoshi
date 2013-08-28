@@ -20,6 +20,10 @@ RAddWidget::RAddWidget(QWidget *parent) :
     QShortcut* shortcut = new QShortcut(QKeySequence(tr("Ctrl+S", "Record|Save")), this);
     connect( shortcut, SIGNAL(activated()), this, SLOT(save()) );
     shortcut->setContext( Qt::WidgetWithChildrenShortcut );
+
+    foreach( QString item, Types )
+        ui->typeEdit->addItem(item);
+    ui->typeEdit->setCurrentIndex(index_from_type("paper"));
 }
 
 RAddWidget::~RAddWidget()
@@ -50,11 +54,14 @@ void RAddWidget::load()
     }else{
         ui->titleEdit->setText(current->title);
         ui->authorsEdit->setText(current->authors);
+        ui->typeEdit->setCurrentIndex(index_from_type(current->type));
         ui->linkEdit->setText(current->link);
         ui->magEdit->setText(current->mag);
         ui->volumeEdit->setValue(current->volume);
         ui->issueEdit->setValue(current->issue);
         ui->yearEdit->setValue(current->year);
+        ui->firstpageEdit->setValue(current->first_page);
+        ui->lastpageEdit->setValue(current->last_page);
         ui->keywordsEdit->setText(current->keywords);
         ui->abstractEdit->setPlainText(current->abstract);
         ui->fileEdit->load(current->file);
@@ -80,12 +87,15 @@ void RAddWidget::save()
     int year = ui->yearEdit->value();
 
     current->title = title;    
-    current->authors = ui->authorsEdit->text().trimmed();
+    current->authors = capitalize(ui->authorsEdit->text().trimmed());
     current->link = ui->linkEdit->text().trimmed();
+    current->type = Types[ui->typeEdit->currentIndex()];
     current->mag = mag;
     current->volume = ui->volumeEdit->value();
     current->issue = ui->issueEdit->value();
     current->year = year;
+    current->first_page = ui->firstpageEdit->value();
+    current->last_page = ui->lastpageEdit->value();
     current->keywords = ui->keywordsEdit->text().trimmed();
     current->abstract = ui->abstractEdit->toPlainText().trimmed();
 
@@ -115,10 +125,13 @@ void RAddWidget::clear()
     ui->titleEdit->clear();
     ui->authorsEdit->clear();
     ui->linkEdit->clear();
+    ui->typeEdit->setCurrentIndex(index_from_type("paper"));
     ui->magEdit->clear();
     ui->volumeEdit->setValue(1);
     ui->issueEdit->setValue(1);
     ui->yearEdit->setValue(2000);
+    ui->firstpageEdit->setValue(1);
+    ui->lastpageEdit->setValue(1);
     ui->keywordsEdit->clear();
     ui->abstractEdit->clear();
     ui->fileEdit->load("");

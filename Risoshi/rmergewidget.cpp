@@ -45,7 +45,7 @@ void RMergeWidget::updateView(QString path)
     connection->addModel<Category>();
     connection->addModel<CategoryJoin>();
 
-    mergeModel.setQuery("SELECT title,authors,link,mag,volume,issue,year,keywords,file,abstract FROM Article;", db);
+    mergeModel.setQuery("SELECT " + fields + " FROM Article;", db);
     checkRecords();
 }
 
@@ -65,11 +65,14 @@ void RMergeWidget::checkRecords()
             Article* atc = new Article();
             atc->title = object->title;
             atc->authors = object->authors;
+            atc->type = object->type;
             atc->link = object->link;
             atc->mag = object->mag;
             atc->volume = object->volume;
             atc->issue = object->issue;
             atc->year = object->year;
+            atc->first_page = object->first_page;
+            atc->last_page = object->last_page;
             atc->keywords = object->keywords;
             atc->abstract = object->abstract;            
             atc->file = object->file;
@@ -79,11 +82,11 @@ void RMergeWidget::checkRecords()
             DQList<Article> link_objects = link_query.all();
             for( int i = 0; i < title_objects.size(); ++i ){
                 Article* atc = objects.at(j);
-                mergeModel.addExcluded(mcTitle, atc->title);
+                mergeModel.addExcluded(cTitle - 1, atc->title);
             }
             for( int i = 0; i < link_objects.size(); ++i ){
                 Article* atc = objects.at(j);
-                mergeModel.addExcluded(mcLink, atc->link);
+                mergeModel.addExcluded(cLink - 1, atc->link);
            }
         }
     }

@@ -12,11 +12,6 @@ class RTableView : public QTableView
     Q_OBJECT
 
 public:
-
-    enum Columns {
-        cId = 0, cTitle, cAuthors, cLink, cMag, cVolume, cIssue, cYear, cKeywords, cFile, cAbstract
-    };
-
     explicit RTableView(QWidget *parent = 0);
     ~RTableView();
     void setModel(RSqlQueryModel *model);

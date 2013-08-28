@@ -48,7 +48,7 @@ void RSqlQueryModel::removeCurrent()
 
 void RSqlQueryModel::update()
 {
-    this->setQuery( "SELECT id,title,authors,link,mag,volume,issue,year,keywords,file,abstract FROM Article;" );
+    this->setQuery( "SELECT id," + fields + " FROM Article;" );
     while( this->canFetchMore() )
         this->fetchMore();
 }
