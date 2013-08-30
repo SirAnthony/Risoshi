@@ -19,6 +19,7 @@ RFileWidget::~RFileWidget()
 
 QString RFileWidget::save( QString name )
 {
+    name = name.remove(QRegExp("[<>:/%\"\\|?*\n\r]"));
     QFile sourceFile(ui->fileEdit->text());
     QFileInfo sourceInfo(sourceFile);
 

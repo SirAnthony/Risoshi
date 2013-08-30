@@ -105,8 +105,9 @@ void RAddWidget::save()
         current->file = filename;
 
 
-    if( current->save() ){
+    if( current->save() ){        
         emit ui->categoryWidget->save(current);
+        load();
         return;
     }
 
